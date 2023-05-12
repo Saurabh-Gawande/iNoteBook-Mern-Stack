@@ -3,6 +3,7 @@ const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const fetchUser = require('../Middleware/fetchUser');
 require('dotenv').config();
 
 router.post('/createUser', async (req, res) => {
@@ -28,16 +29,50 @@ router.post('/createUser', async (req, res) => {
     }
     const authToken = jwt.sign(data, process.env.JWT_Token);
     user.save();
-    res.json({authToken});
+    res.json({ authToken });
   }
 });
 
-router.get('/users', async (req, res) => {
-  const user = await User.find();
-  res.json(user);
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: 'please try to login with correct credential' });
+    };
+
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    if (!passwordCompare) {
+      return res.status(400).json({ error: 'please try to login with correct credential' });
+    };
+
+    const data = {
+      user: {
+        id: user.id
+      }
+    };
+
+    const authToken = jwt.sign(data, process.env.JWT_Token);
+    res.json({ authToken });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Internal server Error')
+  }
 });
 
+router.post('/getusers', fetchUser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.json(user);
 
+  } catch (error) {
+    console.error(error.message);
+    res.status(401).send('Internal server Error');
+  }
+});
 
 
 module.exports = router;
