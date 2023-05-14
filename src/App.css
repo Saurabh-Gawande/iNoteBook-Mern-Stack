@@ -1,13 +1,8 @@
-.div{
-  height: 500px;
-  /* text-align: center; */ 
-   margin: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+*{
+  margin: 0;
+  padding: 0;
 }
 
-.div > div{
-  padding: 5px;
+i{
+  cursor: pointer;
 }
