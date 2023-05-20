@@ -30,11 +30,11 @@ const AddNote = () => {
           <label htmlFor="description" className="form-label">Description</label>
           <input onChange={onchange} type="text" className="form-control" id="description" name="description" />
         </div>
-        <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+        <div className="mb-3">
+          <label htmlFor="tag" className="form-label">Tag</label>
+          <input onChange={onchange} type="text" className="form-control" id="tag" name="tag" />
         </div>
-        <button onClick={handleClick} type="submit" className="btn btn-primary" >Submit</button>
+        <button onClick={handleClick} type="submit" className="btn btn-primary" >Add Note</button>
       </form>
     </div>
   )

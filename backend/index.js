@@ -3,6 +3,10 @@ const app = express();
 const db = require('./db')
 app.use(express.json())
 require('dotenv').config();
+const cors = require('cors');
+
+app.use(cors());
+
 const auth = require('./routes/auth');
 const note = require('./routes/note');
 
