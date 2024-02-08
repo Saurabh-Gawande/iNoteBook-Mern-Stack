@@ -7,7 +7,7 @@ function Notes() {
   const ref = useRef(null);
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
-  const [note, setNotes] = useState({
+  const [note, setNote] = useState({
     id: "",
     etitle: " ",
     edescription: " ",
@@ -26,12 +26,12 @@ function Notes() {
   }
 
   function onchange(e) {
-    setNotes({ ...note, [e.target.name]: e.target.value });
+    setNote({ ...note, [e.target.name]: e.target.value });
   }
 
   function updatenote(CurrentNote) {
     ref.current.click();
-    setNotes({
+    setNote({
       id: CurrentNote._id,
       etitle: CurrentNote.title,
       edescription: CurrentNote.description,
@@ -40,8 +40,31 @@ function Notes() {
   }
 
   return (
-    <>
-      <AddNote />
+    <div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 50vw)",
+          flex: "1",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <AddNote />
+        </div>
+        <div>
+          <h2>Your Notes</h2>
+          <div>{notes.length === 0 && "no notes to display"}</div>
+          {notes.map((note, index) => (
+            <NoteItem note={note} updatenote={updatenote} key={index} />
+          ))}
+        </div>
+      </div>
       <button
         ref={ref}
         type="button"
@@ -145,17 +168,7 @@ function Notes() {
           </div>
         </div>
       </div>
-
-      <div className="row my-3">
-        <h2>Your Notes</h2>
-        <div className="container">
-          {notes.length === 0 && "no notes to display"}
-        </div>
-        {notes.map((note, index) => (
-          <NoteItem note={note} updatenote={updatenote} key={index} />
-        ))}
-      </div>
-    </>
+    </div>
   );
 }
 

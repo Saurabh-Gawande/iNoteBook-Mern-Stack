@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import NoteContext from "../context/notes/noteContext";
+import "../Style/Note.css";
 
 const AddNote = () => {
   const context = useContext(NoteContext);
@@ -19,7 +20,7 @@ const AddNote = () => {
   }
 
   return (
-    <div className="container my-3">
+    <div className="addNote">
       <h2>Add a Note</h2>
       <form className="my-3">
         <div className="mb-3">

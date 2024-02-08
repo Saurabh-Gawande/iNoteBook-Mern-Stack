@@ -7,20 +7,39 @@ import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Unauthenticated from "./components/Unauthenticated";
 
 const App = () => {
   return (
     <>
       <>
         <NoteState>
-          <Navbar />
-          <div className="container">
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/about" element={<About />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/signup" element={<SignUp />} />
-            </Routes>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+            }}
+          >
+            <Navbar />
+            <div
+              style={{ flex: 1, backgroundColor: "#eeeeee", overflowY: "auto" }}
+            >
+              <Routes>
+                <Route exact path="/signup" element={<SignUp />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route exact path="/" element={<Home />} />
+                </Route>
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/about" element={<About />} />
+                <Route
+                  exact
+                  path="/unautheticated"
+                  element={<Unauthenticated />}
+                />
+              </Routes>
+            </div>
           </div>
         </NoteState>
       </>

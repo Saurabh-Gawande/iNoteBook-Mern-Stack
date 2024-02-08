@@ -3,7 +3,7 @@ import Notes from "./Notes";
 
 function Home() {
   return (
-    <div>
+    <div style={{ height: "93vh" }}>
       <Notes />
     </div>
   );

@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 function Navbar() {
   let location = useLocation();
+  let navigate = useNavigate();
 
   return (
     <nav
@@ -48,12 +49,28 @@ function Navbar() {
             </li>
           </ul>
           <form className="d-flex">
-            <Link className="btn btn-primary mx-1" to="/login" role="button">
-              Login
-            </Link>
-            <Link className="btn btn-primary mx-1" to="/signup" role="button">
-              SignUp
-            </Link>
+            {!sessionStorage.getItem("loginToken") ? (
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </button>
+            ) : (
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={() => {
+                  navigate("/login");
+                  sessionStorage.setItem("loginToken", "");
+                }}
+              >
+                Logout
+              </button>
+            )}
           </form>
         </div>
       </div>
