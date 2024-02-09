@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+  const host = "http://localhost:4500";
   const navigate = useNavigate();
   const [credential, setCredential] = useState({
     name: "",
@@ -17,7 +18,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     const { name, email, password } = credential;
     e.preventDefault();
-    const response = await fetch("http://localhost:4500/api/auth/createUser", {
+    const response = await fetch(`${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -29,7 +30,7 @@ function SignUp() {
 
     sessionStorage.setItem("signUpToken", json.authToken);
     setCredential({ name: "", email: "", password: "", cpassword: "" });
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -129,14 +130,19 @@ function SignUp() {
                             type="button"
                             class="btn btn-primary btn-lg"
                             onClick={handleSubmit}
+                            disabled={
+                              credential.name === "" ||
+                              credential.password === "" ||
+                              credential.cpassword === "" ||
+                              credential.email === ""
+                            }
                           >
                             Register
                           </button>
                         </div>
                         <div class="form-check d-flex justify-content-center mb-5">
                           <label class="form-check-label" for="form2Example3">
-                            Have already an account?{" "}
-                            <a href="/login">login here</a>
+                            Have already an account? <a href="/">login here</a>
                           </label>
                         </div>
                       </form>

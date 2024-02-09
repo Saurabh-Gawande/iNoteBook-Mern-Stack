@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import "../Style/Login.css";
 
 function Login() {
+  const host = "http://localhost:4500";
   const [credential, setCredential] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:4500/api/auth/login", {
+    const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -25,7 +26,7 @@ function Login() {
     } else {
       setCredential({ email: "", password: "" });
       sessionStorage.setItem("loginToken", json.authToken);
-      navigate("/");
+      navigate("/home");
     }
   };
 
@@ -34,111 +35,98 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <div className="login__container">
-        <div className="login__logo">
-          <img src="./iNotebook.svg" alt="iNotebook" />
-        </div>
-        <div className="login__desc">
-          <p>Secure Your Notes, Unlock Your Creativity</p>
-          <p style={{ color: "royalblue", fontSize: "25px" }}>
-            HandCrafted with ❤️ by{" "}
-          </p>
-          <h3>Saurabh Gawande</h3>
-        </div>
-        <div className="login__auth">
-          <div className="login__authOptions">
-            <div className="login__authOption">
-              <img
-                className="login__googleAuth"
-                src="https://media-public.canva.com/MADnBiAubGA/3/screen.svg"
-                alt=""
-              />
-              <p
-              // onClick={signIn}
-              >
-                Continue With Google
-              </p>
-            </div>
-            <div className="login__authOption">
-              <img
-                className="login__googleAuth"
-                src="https://th.bing.com/th/id/OIP.YBdpYxDSg6AtMUKXHme2MQHaHa?rs=1&pid=ImgDetMain"
-                alt=""
-              />
-              <span>Continue With Facebook</span>
-            </div>
-            <div className="login__authDesc">
-              <p>
-                <span style={{ color: "blue", cursor: "pointer" }}>
-                  Sign Up With Email
-                </span>
-                . By continuing you indicate that you have read and agree to
-                iNotebook's{" "}
-                <span style={{ color: "blue", cursor: "pointer" }}>
-                  Terms of Service{" "}
-                </span>
-                and{" "}
-                <span style={{ color: "blue", cursor: "pointer" }}>
-                  Privacy Policy
-                </span>
-                .
-              </p>
+    <div>
+      <div class="vh-93 vw-90" style={{ margin: "3%" }}>
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style={{ borderRadius: "25px" }}>
+                <div class="card-body p-md-5">
+                  <div className="login__desc">
+                    <div className="inotebook">iNotebook</div>
+                    <p>Secure Your Notes, Unlock Your Creativity!</p>
+                    <p style={{ color: "royalblue", fontSize: "25px" }}>
+                      HandCrafted with ❤️ by{" "}
+                    </p>
+                    <h4>Saurabh Gawande</h4>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                        Login
+                      </p>
+                      <form class="mx-1 mx-md-4">
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input
+                              type="email"
+                              className="form-control"
+                              id="email"
+                              aria-describedby="emailHelp"
+                              placeholder="Enter email"
+                              name="email"
+                              value={credential.email}
+                              onChange={onchange}
+                              required
+                            />
+                            <label class="form-label" htmlFor="email">
+                              Your Email
+                            </label>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <input
+                              type="password"
+                              className="form-control"
+                              id="password"
+                              placeholder="Password"
+                              name="password"
+                              value={credential.password}
+                              onChange={onchange}
+                              required
+                            />
+                            <label class="form-label" htmlFor="cpassword">
+                              Your password
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button
+                            type="button"
+                            class="btn btn-primary btn-lg"
+                            onClick={handleSubmit}
+                            disabled={
+                              credential.email === "" ||
+                              credential.password === ""
+                            }
+                          >
+                            Login
+                          </button>
+                        </div>
+                        <div class="form-check d-flex justify-content-center mb-5">
+                          <label class="form-check-label" for="form2Example3">
+                            Don't have an account?{" "}
+                            <a href="/signup">signup here</a>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                        class="img-fluid"
+                        alt="Sample image"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="login__emailPass">
-            <div className="login__label">
-              <h4>Login</h4>
-            </div>
-            <div className="login__inputFields">
-              <div className="login__inputField">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  name="email"
-                  value={credential.email}
-                  onChange={onchange}
-                  required
-                />
-              </div>
-              <div className="login__inputField">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Password"
-                  name="password"
-                  value={credential.password}
-                  onChange={onchange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="login__forgButt">
-              <small>Forgot Password?</small>
-              <button onClick={handleSubmit}>Login</button>
-            </div>
-            <label style={{ padding: 10 }}>
-              Don't have an account? <a href="/signup">SignUp here</a>
-            </label>
-          </div>
-        </div>
-        <div className="login__lang">
-          <p>हिन्दी</p>
-          {/* <ArrowForwardIos fontSize="small" /> */}
-        </div>
-        <div className="login__footer">
-          <p>About</p>
-          <p>Languages</p>
-          <p>Careers</p>
-          <p>Businesses</p>
-          <p>Privacy</p>
-          <p>Terms</p>
-          <p>Contact</p>
-          <p>&copy; iNotebook Fake Inc. 2021</p>
         </div>
       </div>
     </div>

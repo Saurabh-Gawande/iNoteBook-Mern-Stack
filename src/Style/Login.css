@@ -19,8 +19,9 @@
 }
 
 .login__logo {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
+
   height: 12vh;
   width: 40vw;
   margin-top: -5vh;
@@ -30,11 +31,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10px;
 }
 
-.login__desc > h3 {
-  margin-top: 10px;
+.login__desc > h4 {
   text-align: center;
   font-size: xx-large;
   font-family: "Cedarville Cursive", cursive;
@@ -68,7 +67,17 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.inotebook {
+  font-family: "Lora", serif;
+  font-weight: 600;
+  font-size: 40px;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  color: #e74c3c;
+  text-shadow: 3px 3px 0 #fff, -3px -3px 0 #fff, 3px -3px 0 #fff,
+    -3px 3px 0 #fff;
+}
 .login__authOption:hover {
   background-color: rgb(226, 226, 226);
 }

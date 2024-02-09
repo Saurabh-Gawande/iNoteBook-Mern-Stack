@@ -13,36 +13,34 @@ import Unauthenticated from "./components/Unauthenticated";
 const App = () => {
   return (
     <>
-      <>
-        <NoteState>
+      <NoteState>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100vh",
+          }}
+        >
+          <Navbar />
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100vh",
-            }}
+            style={{ flex: 1, backgroundColor: "#eeeeee", overflowY: "auto" }}
           >
-            <Navbar />
-            <div
-              style={{ flex: 1, backgroundColor: "#eeeeee", overflowY: "auto" }}
-            >
-              <Routes>
-                <Route exact path="/signup" element={<SignUp />} />
-                <Route element={<ProtectedRoute />}>
-                  <Route exact path="/" element={<Home />} />
-                </Route>
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/about" element={<About />} />
-                <Route
-                  exact
-                  path="/unautheticated"
-                  element={<Unauthenticated />}
-                />
-              </Routes>
-            </div>
+            <Routes>
+              <Route exact path="/signup" element={<SignUp />} />
+              <Route element={<ProtectedRoute />}>
+                <Route exact path="/home" element={<Home />} />
+              </Route>
+              <Route exact path="/" element={<Login />} />
+              <Route exact path="/about" element={<About />} />
+              <Route
+                exact
+                path="/unautheticated"
+                element={<Unauthenticated />}
+              />
+            </Routes>
           </div>
-        </NoteState>
-      </>
+        </div>
+      </NoteState>
     </>
   );
 };

@@ -31,8 +31,8 @@ function Unauthenticated() {
         />
 
         <h3 style={{ margin: "5%" }}>
-          Please <a href="/login">Login</a> to access this page, or if you are
-          new here, please <a href="/signup">SignUp</a>.
+          Please <a href="/">Login</a> to access this page, or if you are new
+          here, please <a href="/signup">SignUp</a>.
         </h3>
       </div>
     </div>

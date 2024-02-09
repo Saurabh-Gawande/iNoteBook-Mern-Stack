@@ -10,7 +10,7 @@ function Navbar() {
       data-bs-theme="dark"
     >
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/home">
           iNotebook
         </Link>
         <button
@@ -32,7 +32,7 @@ function Navbar() {
                   location.pathname === "/" ? "active" : ""
                 }`}
                 aria-current="page"
-                to="/"
+                to="/home"
               >
                 Home
               </Link>
@@ -54,7 +54,7 @@ function Navbar() {
                 type="button"
                 class="btn btn-primary"
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/");
                 }}
               >
                 Login
@@ -64,7 +64,7 @@ function Navbar() {
                 type="button"
                 class="btn btn-primary"
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/");
                   sessionStorage.setItem("loginToken", "");
                 }}
               >
