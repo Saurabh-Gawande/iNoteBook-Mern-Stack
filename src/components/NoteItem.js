@@ -6,12 +6,23 @@ function NoteItem({ note, updatenote }) {
   const { deleteNote } = context;
 
   return (
-    <div className="col-md-3 mx-2 my-2">
-      <div className="card" style={{ width: "18rem" }}>
+    <div className="col-md-3 mx-2 my-2" style={{ width: "100%" }}>
+      <div className="card">
         <div className="card-body ">
           <div className="d-flex justify-content-between align-item-center">
-            <h5 className="card-title">{note.title}</h5>
-            <div className="icon">
+            <div>
+              <h5 className="card-title">{note.title}</h5>
+              <p className="card-text">{note.description}</p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                flexDirection: "column",
+                height: "8vh",
+              }}
+            >
               <i
                 onClick={() => {
                   deleteNote(note._id);
@@ -26,7 +37,6 @@ function NoteItem({ note, updatenote }) {
               ></i>
             </div>
           </div>
-          <p className="card-text">{note.description}</p>
         </div>
       </div>
     </div>

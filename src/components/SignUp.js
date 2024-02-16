@@ -16,21 +16,21 @@ function SignUp() {
   }
 
   const handleSubmit = async (e) => {
-    const { name, email, password } = credential;
+    const { name, email, password, cpassword } = credential;
     e.preventDefault();
     const response = await fetch(`${host}/api/auth/createUser`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({ name, email, password }),
+      body: JSON.stringify({ name, email, password, cpassword }),
     });
     const json = await response.json();
-    console.log(json);
-
-    sessionStorage.setItem("signUpToken", json.authToken);
-    setCredential({ name: "", email: "", password: "", cpassword: "" });
-    navigate("/");
+    if (json.success) {
+      sessionStorage.setItem("signUpToken", json.authToken);
+      setCredential({ name: "", email: "", password: "", cpassword: "" });
+      navigate("/");
+    } else alert(json.error);
   };
 
   return (
@@ -140,7 +140,7 @@ function SignUp() {
                             Register
                           </button>
                         </div>
-                        <div class="form-check d-flex justify-content-center mb-5">
+                        <div class="form-check d-flex justify-content-center mb-4">
                           <label class="form-check-label" for="form2Example3">
                             Have already an account? <a href="/">login here</a>
                           </label>

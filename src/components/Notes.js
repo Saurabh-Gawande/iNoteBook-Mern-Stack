@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/notes/noteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
+import "../Style/Note.css";
 
 function Notes() {
   const ref = useRef(null);
@@ -41,13 +42,7 @@ function Notes() {
 
   return (
     <div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 50vw)",
-          flex: "1",
-        }}
-      >
+      <div>
         <div
           style={{
             display: "flex",
@@ -57,12 +52,35 @@ function Notes() {
         >
           <AddNote />
         </div>
-        <div>
-          <h2>Your Notes</h2>
-          <div>{notes.length === 0 && "no notes to display"}</div>
-          {notes.map((note, index) => (
-            <NoteItem note={note} updatenote={updatenote} key={index} />
-          ))}
+        <div style={{ margin: "5%" }}>
+          <div className="addNoteHeading">
+            <h2>Your Notes</h2>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {notes.length === 0 && (
+              <img
+                src="addNote.svg"
+                style={{
+                  minWidth: "30vw",
+                  maxHeight: "20vh",
+                  backgroundColor: "white",
+                  padding: "10px",
+                  borderRadius: "8px",
+                }}
+              />
+            )}
+          </div>
+          <div className="notesContainer">
+            {notes.map((note, index) => (
+              <NoteItem note={note} updatenote={updatenote} key={index} />
+            ))}
+          </div>
         </div>
       </div>
       <button

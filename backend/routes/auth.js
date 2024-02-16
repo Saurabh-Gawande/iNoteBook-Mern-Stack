@@ -15,7 +15,11 @@ router.post("/createUser", async (req, res) => {
         .status(400)
         .json({ success, error: "sorry a user with this email already exist" });
     }
-
+    if (req.body.password !== req.body.cpassword) {
+      return res
+        .status(400)
+        .json({ success, error: "Posssword is not matichhing" });
+    }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 

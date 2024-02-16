@@ -1,9 +1,19 @@
 .addNote {
-  width: 30vw;
-  height: 50vh;
+  min-width: 30vw;
   padding: 2%;
   background-color: white;
   border-radius: 8px;
+  margin-top: 5%;
 }
 
+.notesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
 
+.addNoteHeading {
+  text-align: center;
+  padding-bottom: 2%;
+}
