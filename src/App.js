@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthenticated from "./components/Unauthenticated";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
                 path="/unautheticated"
                 element={<Unauthenticated />}
               />
+              <Route exact path="*" element={<NotFound />} />
             </Routes>
           </div>
         </div>
