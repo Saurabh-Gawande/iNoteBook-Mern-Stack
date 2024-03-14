@@ -16,9 +16,9 @@ function Notes() {
   });
 
   useEffect(() => {
-    getNotes();
     // eslint-disable-next-line
-  }, [notes]);
+    getNotes();
+  }, []);
 
   function handleClick(e) {
     editNote(note.id, note.etitle, note.edescription, note.etag);
